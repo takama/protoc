@@ -33,4 +33,4 @@ RUN git clone -b ${GRPC_GATEWAY_VERSION} https://github.com/grpc-ecosystem/grpc-
 FROM alpine:3.9
 COPY --from=protoc_builder /out/ /usr/local/
 
-ENTRYPOINT ["/usr/local/bin/protoc", "-I/usr/local/include"]
+CMD ["/usr/local/bin/protoc", "-I/usr/local/include"]
