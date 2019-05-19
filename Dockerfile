@@ -32,7 +32,9 @@ RUN git clone -b ${GRPC_GATEWAY_VERSION} https://github.com/grpc-ecosystem/grpc-
     github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway@${GRPC_GATEWAY_VERSION} \
     github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger@${GRPC_GATEWAY_VERSION} && \
     install -c ${GOPATH}/bin/protoc-gen* ${OUTDIR}/bin/ && \
-    cp -R ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis/* ${OUTDIR}/include/
+    cp -R ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis/* ${OUTDIR}/include/ && \
+    mkdir -p ${OUTDIR}/include/protoc-gen-swagger/options && \
+    cp ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger/options/*.proto ${OUTDIR}/include/protoc-gen-swagger/options/
 
 FROM alpine:3.9
 COPY --from=protoc_builder /out/ /usr/local/
