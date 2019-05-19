@@ -6,13 +6,17 @@ ENV GRPC_VERSION=v1.20.1
 ENV GRPC_GEN_GO_VERSION=v1.3.1
 ENV GRPC_GATEWAY_VERSION=v1.9.0
 ENV OUTDIR=/out
-ENV LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8 LANGUAGE=en_US.UTF-8
 
 # Install protoc
-RUN curl -sLO https://github.com/google/protobuf/releases/download/v${PROTOBUF_VERSION}/protoc-${PROTOBUF_VERSION}-linux-x86_64.zip && \
-    unzip protoc-${PROTOBUF_VERSION}-linux-x86_64.zip -d ${OUTDIR} && \
-    chmod +x ${OUTDIR}/bin/protoc && \
-    chmod -R 755 ${OUTDIR}/include/
+RUN mkdir -p /protobuf && \
+    curl -L https://github.com/google/protobuf/archive/v${PROTOBUF_VERSION}.tar.gz | tar xvz --strip-components=1 -C /protobuf
+RUN cd /protobuf && \
+    autoreconf -f -i -Wall,no-obsolete && \
+    ./configure --prefix=/usr --enable-static=no && \
+    make -j2 && make install
+RUN cd /protobuf && \
+    make install DESTDIR=${OUTDIR} && \
+    mv ${OUTDIR}/usr/* ${OUTDIR}/
 
 # Install gRPC plugins: PHP
 RUN git clone -b ${GRPC_VERSION} https://github.com/grpc/grpc.git /grpc && \
@@ -32,5 +36,7 @@ RUN git clone -b ${GRPC_GATEWAY_VERSION} https://github.com/grpc-ecosystem/grpc-
 
 FROM alpine:3.9
 COPY --from=protoc_builder /out/ /usr/local/
+# Needed shared libraries and tools by protobuf and their plugins
+RUN apk --update add libstdc++
 
-CMD ["/usr/local/bin/protoc", "-I/usr/local/include"]
+ENTRYPOINT ["/usr/local/bin/protoc", "-I/usr/local/include"]
