@@ -1,15 +1,15 @@
 FROM alpine:3.11 as protoc_builder
-RUN apk add --no-cache build-base curl automake autoconf libtool git zlib-dev unzip
+RUN apk add --no-cache build-base curl automake autoconf libtool git zlib-dev unzip linux-headers
 
-ENV PROTOBUF_VERSION=3.11.4
-ENV GRPC_VERSION=v1.26.0
-ENV GRPC_GEN_GO_VERSION=v1.4.0
-ENV GRPC_GATEWAY_VERSION=v1.14.4
+ENV PROTOBUF_VERSION=v3.11.4
+ENV GRPC_VERSION=v1.28.1
+ENV GRPC_GEN_GO_VERSION=v1.4.1
+ENV GRPC_GATEWAY_VERSION=v1.14.5
 ENV OUTDIR=/out
 
 # Install protoc
 RUN mkdir -p /protobuf && \
-    curl -L https://github.com/protocolbuffers/protobuf/archive/v${PROTOBUF_VERSION}.tar.gz | tar xvz --strip-components=1 -C /protobuf
+    curl -L https://github.com/protocolbuffers/protobuf/archive/${PROTOBUF_VERSION}.tar.gz | tar xvz --strip-components=1 -C /protobuf
 RUN cd /protobuf && \
     autoreconf -f -i -Wall,no-obsolete && \
     ./configure --prefix=/usr --enable-static=no && \
