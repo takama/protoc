@@ -1,8 +1,8 @@
-FROM alpine:3.11 as protoc_builder
+FROM alpine:3.12 as protoc_builder
 RUN apk add --no-cache build-base curl automake autoconf libtool git zlib-dev unzip linux-headers
 
 ENV PROTOBUF_VERSION=v3.12.3
-ENV GRPC_VERSION=v1.29.1
+ENV GRPC_VERSION=v1.30.0
 ENV GRPC_GEN_GO_VERSION=v1.4.2
 ENV GRPC_GATEWAY_VERSION=v1.14.6
 ENV OUTDIR=/out
@@ -36,7 +36,7 @@ RUN git clone -b ${GRPC_GATEWAY_VERSION} https://github.com/grpc-ecosystem/grpc-
     mkdir -p ${OUTDIR}/include/protoc-gen-swagger/options && \
     cp ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger/options/*.proto ${OUTDIR}/include/protoc-gen-swagger/options/
 
-FROM alpine:3.11
+FROM alpine:3.12
 COPY --from=protoc_builder /out/ /usr/local/
 # Needed shared libraries and tools by protobuf and their plugins
 RUN apk --update add libstdc++
