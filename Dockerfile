@@ -1,10 +1,10 @@
 FROM alpine:3.12 as protoc_builder
 RUN apk add --no-cache build-base curl automake autoconf libtool git zlib-dev unzip linux-headers
 
-ENV PROTOBUF_VERSION=v3.12.4
+ENV PROTOBUF_VERSION=v3.13.0
 ENV GRPC_VERSION=v1.31.0
 ENV GRPC_GEN_GO_VERSION=v1.4.2
-ENV GRPC_GATEWAY_VERSION=v1.14.6
+ENV GRPC_GATEWAY_VERSION=v1.14.7
 ENV OUTDIR=/out
 
 # Install protoc
