@@ -2,9 +2,10 @@ FROM alpine:3.12 as protoc_builder
 RUN apk add --no-cache build-base curl automake autoconf libtool git zlib-dev unzip linux-headers
 
 ENV PROTOBUF_VERSION=v4.0.0-rc2
-ENV GRPC_VERSION=v1.31.0
+ENV GRPC_VERSION=v1.32.0
 ENV GRPC_GEN_GO_VERSION=v1.4.2
-ENV GRPC_GATEWAY_VERSION=v2.0.0-beta.4
+ENV GRPC_GATEWAY_VERSION=v2.0.0-beta.5
+ENV GRPC_WEB_VERSION=1.2.1
 ENV OUTDIR=/out
 
 # Install protoc
@@ -23,7 +24,7 @@ RUN git clone -b ${GRPC_VERSION} https://github.com/grpc/grpc.git /grpc && \
     cd /grpc && git submodule update --init && make grpc_php_plugin && \
     mv bins/opt/grpc_php_plugin ${OUTDIR}/bin/
 
-# Install Go, gRPC gateway and swagger plugins
+# Install Go, gRPC gateway and openapi plugins
 RUN apk add --no-cache go
 ENV GOPATH=/go GO111MODULE=on PATH=/go/bin/:$PATH
 RUN git clone -b ${GRPC_GATEWAY_VERSION} https://github.com/grpc-ecosystem/grpc-gateway.git \
@@ -33,10 +34,19 @@ RUN git clone -b ${GRPC_GATEWAY_VERSION} https://github.com/grpc-ecosystem/grpc-
     github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@${GRPC_GATEWAY_VERSION} \
     github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@${GRPC_GATEWAY_VERSION} && \
     install -c ${GOPATH}/bin/protoc-gen* ${OUTDIR}/bin/ && \
-    cp -R ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis/* ${OUTDIR}/include/ && \
     mkdir -p ${OUTDIR}/include/protoc-gen-openapiv2/options && \
     cp ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway/protoc-gen-openapiv2/options/*.proto \
     ${OUTDIR}/include/protoc-gen-openapiv2/options/
+
+# Install gRPC-Web plugin
+RUN curl -sSL https://github.com/grpc/grpc-web/releases/download/${GRPC_WEB_VERSION}/protoc-gen-grpc-web-${GRPC_WEB_VERSION}-linux-x86_64 \
+    -o ${OUTDIR}/bin/protoc-gen-grpc-web && chmod +x ${OUTDIR}/bin/protoc-gen-grpc-web
+
+# Add googleapis protos
+RUN git clone https://github.com/googleapis/googleapis.git /googleapis && \
+    cp -R /googleapis/google/type ${OUTDIR}/include/google/type && \
+    cp -R /googleapis/google/rpc ${OUTDIR}/include/google/rpc && \
+    cp -R /googleapis/google/api ${OUTDIR}/include/google/api
 
 FROM alpine:3.12
 COPY --from=protoc_builder /out/ /usr/local/
