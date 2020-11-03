@@ -2,7 +2,7 @@ FROM alpine:3.12 as protoc_builder
 RUN apk add --no-cache build-base curl automake autoconf libtool git zlib-dev unzip linux-headers
 
 ENV PROTOBUF_VERSION=v4.0.0-rc2
-ENV GRPC_VERSION=v1.32.0
+ENV GRPC_VERSION=v1.33.2
 ENV GRPC_GEN_GO_VERSION=v1.4.3
 ENV GRPC_GATEWAY_VERSION=v2.0.1
 ENV GRPC_WEB_VERSION=1.2.1
