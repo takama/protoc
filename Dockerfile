@@ -34,6 +34,7 @@ RUN git clone -b ${GRPC_GATEWAY_VERSION} https://github.com/grpc-ecosystem/grpc-
     ${GOPATH}/src/github.com/grpc-ecosystem/grpc-gateway && \
     mkdir -p ${GOPATH}/src/u && cd ${GOPATH}/src/u && go mod init && go get -u -v -ldflags '-w -s' \
     github.com/golang/protobuf/protoc-gen-go@${GRPC_GEN_GO_VERSION} \
+    google.golang.org/grpc/cmd/protoc-gen-go-grpc \
     github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@${GRPC_GATEWAY_VERSION} \
     github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@${GRPC_GATEWAY_VERSION} && \
     install -c ${GOPATH}/bin/protoc-gen* ${OUTDIR}/bin/ && \
