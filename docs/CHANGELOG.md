@@ -1,4 +1,8 @@
-# Version v0.3.5
+# Version v0.3.6
+
+## v0.3.6
+
+- Customized routing error [HTTP status codes](https://grpc-ecosystem.github.io/grpc-gateway/docs/mapping/customizing_your_gateway/#customizing-routing-errors)
 
 ## v0.3.5
 
