@@ -2,7 +2,7 @@ FROM alpine:3.12 as protoc_builder
 RUN apk add --no-cache build-base curl automake autoconf libtool git zlib-dev unzip linux-headers
 
 # Protobuf v4 postponed in favour of v3.14 v3..., etc
-ENV PROTOBUF_VERSION=v3.17.0
+ENV PROTOBUF_VERSION=v3.17.1
 ENV GRPC_VERSION=v1.38.0
 ENV GRPC_GEN_GO_VERSION=v1.5.2
 ENV GRPC_GATEWAY_VERSION=v2.4.0
