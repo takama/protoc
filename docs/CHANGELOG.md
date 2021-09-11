@@ -1,4 +1,8 @@
-# Version v0.3.17
+# Version v0.3.18
+
+## v0.3.18
+
+- Used gRPC version [v1.40.0](https://github.com/grpc/grpc/releases/tag/v1.40.0)
 
 ## v0.3.17
 
