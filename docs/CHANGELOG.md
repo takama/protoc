@@ -1,4 +1,8 @@
-# Version v0.3.24
+# Version v0.3.25
+
+## v0.3.25
+
+- Used Protocol Buffers [v3.19.1](https://github.com/protocolbuffers/protobuf/releases/tag/v3.19.1)
 
 ## v0.3.24
 
