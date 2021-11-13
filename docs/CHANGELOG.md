@@ -1,4 +1,8 @@
-# Version v0.3.25
+# Version v0.4.0
+
+## v0.4.0
+
+- Used gRPC-Web [1.3.0](https://github.com/grpc/grpc-web/releases/tag/1.3.0)
 
 ## v0.3.25
 
