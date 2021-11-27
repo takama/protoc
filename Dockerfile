@@ -1,11 +1,11 @@
-FROM alpine:3.12 as protoc_builder
+FROM alpine:3.15 as protoc_builder
 RUN apk add --no-cache build-base curl automake autoconf libtool git zlib-dev unzip linux-headers
 
 # Protobuf v4 postponed in favour of v3.14 v3..., etc
 ENV PROTOBUF_VERSION=v3.19.1
 ENV GRPC_VERSION=v1.42.0
 ENV GRPC_GEN_GO_VERSION=v1.5.2
-ENV GRPC_GATEWAY_VERSION=v2.6.0
+ENV GRPC_GATEWAY_VERSION=v2.7.0
 ENV GRPC_WEB_VERSION=1.3.0
 ENV OUTDIR=/out
 
@@ -52,7 +52,7 @@ RUN git clone https://github.com/googleapis/googleapis.git /googleapis && \
     cp -R /googleapis/google/rpc ${OUTDIR}/include/google/rpc && \
     cp -R /googleapis/google/api ${OUTDIR}/include/google/api
 
-FROM alpine:3.12
+FROM alpine:3.15
 COPY --from=protoc_builder /out/ /usr/local/
 # Needed shared libraries and tools by protobuf and their plugins
 RUN apk --update add libstdc++
