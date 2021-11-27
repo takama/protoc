@@ -1,4 +1,9 @@
-# Version v0.4.1
+# Version v0.4.2
+
+## v0.4.2
+
+- Used gRPC gateway version [v2.7.0](https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v2.7.0)
+- Updated Alpine image up to v3.15
 
 ## v0.4.1
 
