@@ -1,4 +1,8 @@
-# Version v0.4.12
+# Version v0.4.13
+
+## v0.4.13
+
+- Used gRPC gateway version [v2.8.0](https://github.com/grpc-ecosystem/grpc-gateway/releases/tag/v2.8.0)
 
 ## v0.4.12
 
