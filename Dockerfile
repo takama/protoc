@@ -5,7 +5,7 @@ RUN apk add --no-cache build-base curl automake autoconf libtool git zlib-dev un
 ENV PROTOBUF_VERSION=v3.19.4
 ENV GRPC_VERSION=v1.44.0
 ENV GRPC_GEN_GO_VERSION=v1.5.2
-ENV GRPC_GATEWAY_VERSION=v2.7.3
+ENV GRPC_GATEWAY_VERSION=v2.8.0
 ENV GRPC_WEB_VERSION=1.3.1
 ENV OUTDIR=/out
 
