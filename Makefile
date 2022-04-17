@@ -1,5 +1,5 @@
 # Use the v0.0.0 tag for testing, it shouldn't clobber any release builds
-RELEASE ?= v0.4.17
+RELEASE ?= v0.4.18
 CONTAINER_IMAGE ?= takama/protoc
 
 all: build push
