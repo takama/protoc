@@ -1,6 +1,6 @@
 # protoc
 Protocol Buffer compiler and Go/gRPC gateway/swagger generators
 
-## Version v0.4.22
+## Version v0.4.23
 
 See details in the [changelog](docs/CHANGELOG.md)
