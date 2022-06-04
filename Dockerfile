@@ -3,7 +3,7 @@ RUN apk add --no-cache build-base curl automake autoconf libtool git zlib-dev un
 
 # Protobuf v4 postponed in favour of v3.14 v3..., etc
 ENV PROTOBUF_VERSION=v3.20.1
-ENV GRPC_VERSION=v1.46.2
+ENV GRPC_VERSION=v1.46.3
 ENV GRPC_GEN_GO_VERSION=v1.5.2
 ENV GRPC_GATEWAY_VERSION=v2.10.1
 ENV GRPC_WEB_VERSION=1.3.1
