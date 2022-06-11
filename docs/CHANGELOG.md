@@ -1,4 +1,9 @@
-# Version v0.4.26
+# Version v0.5.0
+
+## v0.5.0
+
+- Major changes in Protocols Buffers [versioning](https://developers.google.com/protocol-buffers/docs/news/2022-05-06)
+- Used Protocol Buffers [v21.0](https://github.com/protocolbuffers/protobuf/releases/tag/v21.0)
 
 ## v0.4.26
 
