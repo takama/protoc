@@ -1,4 +1,8 @@
-# Version v0.5.0
+# Version v0.5.1
+
+## v0.5.1
+
+- Used Protocol Buffers [v21.1](https://github.com/protocolbuffers/protobuf/releases/tag/v21.1)
 
 ## v0.5.0
 
