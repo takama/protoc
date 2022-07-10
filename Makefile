@@ -1,5 +1,5 @@
 # Use the v0.0.0 tag for testing, it shouldn't clobber any release builds
-RELEASE ?= v0.5.3
+RELEASE ?= v0.5.4
 CONTAINER_IMAGE ?= ghcr.io/takama/protoc
 
 all: build push
